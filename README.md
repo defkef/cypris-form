@@ -2,6 +2,10 @@
 
 A Cljs library to provide a decent interface to forms including state and error handling. A reagent-bootstrap binding can be found in examples/reagent-bootstrap.cljs
 
+## Install
+
+[![Clojars Project](http://clojars.org/cypris-form/latest-version.svg)](http://clojars.org/cypris-form)
+
 ## Overview
 
 ### Definition
@@ -98,11 +102,6 @@ Then you can instantiate a form with the following interface
 (cf/path coll) ;; => ["collD"]
 (cf/changed? coll) ;; => boolean
 ```
-
-## Install
-
-[![Clojars Project](http://clojars.org/reagent-forms/latest-version.svg)](http://clojars.org/reagent-forms)
-
 
 ## Usage
 
