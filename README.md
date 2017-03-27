@@ -11,7 +11,10 @@ A Cljs library to provide a decent interface to forms including state and error 
 ### Definition
 
 ```clojure
-(def formdef [:fieldA {:type :text :coerce (fn [value] ...) :validate (fn [value] ...) :default-value "foo"}
+(def formdef [:fieldA {:type :text
+                       :coerce (fn [value] ...)
+                       :validate (fn [value] ...)
+                       :default-value "foo"}
               :fieldB {:type :text :my-prop 'value} ;; add custom props as you need
               [:fieldA :fieldB] {:validate (fn [valueA valueB] ...)} ;; for optional multifield constraints only
               :nestedC [
@@ -134,7 +137,7 @@ A reagent atom
 
 ### Submit Action
 
-A function that accepts the input values and submitting form as parameter
+A function that accepts the input values and submitting form as a parameter
 
 ```clojure
 (defn action [{:keys [values form]}] ...)
@@ -207,9 +210,6 @@ Will get called AFTER validation:
 ```clojure
 (def formdef [:fieldA {:type "text" :default-value "default"}]
 
-(defn coerce [valueA]
-;; return modified value
-)
 ```
 
 **Special cases**
@@ -247,7 +247,7 @@ Example:
           [my-ns.reagent-bootstrap :as ui] ;; see examles/reagent-bootstrap
           )
           
-(set! f/*atom-fn* r/atom)
+(set! cf/*atom-fn* r/atom)
 
 (defn my-component []
   (let [action (fn [{:keys [values form]}] ...)
