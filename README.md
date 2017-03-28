@@ -1,6 +1,13 @@
 # cypris-form
 
-A Cljs library to provide a decent interface to forms including state and error handling. A reagent-bootstrap binding can be found in examples/reagent-bootstrap.cljs
+A Cljs library to provide a decent interface to forms including state and error handling. It is based on the following characteristics:
+
+* Single state atom for errors, current values and original values
+* Each field/form points to a value/specific part of the atom
+* Arbitrarily nested forms and collections
+* Multifield validations
+
+A reagent-bootstrap binding can be found in examples/reagent-bootstrap.cljs
 
 ## Install
 
@@ -31,8 +38,8 @@ A Cljs library to provide a decent interface to forms including state and error 
               ...
               ])
 ```
-
-Then you can instantiate a form with the following interface
+There are 3 components: Field, Form and CollForm.
+You can instantiate a new Form with a state atom and an action that is called when the form is submitted.
 
 ### Form
 
@@ -57,11 +64,14 @@ Then you can instantiate a form with the following interface
 (cf/submit! form {:validation (fn [input] ...)
                   :action (fn [{:keys [values form]}] ...)
                   :coercion (fn [input] ...)}) ;; for custom validation, coercion and action
+(cf/set-input! form {:fieldA "value"
+                     :fieldB "value"
+                     :nestedC {:fieldCA "value" :fieldCB {:fieldCB1 "value"}}
+                     :collD [{:fieldDA "value" :fieldDB "value"}]}) ;; set form input manually
 (cf/input form) ;; => {:fieldA "value" 
                 ;;     :fieldB "value" 
                 ;;     :nestedC {:fieldCA "value" :fieldCB {:fieldCB1 "value"}} 
                 ;;     :collD [{:fieldDA "value" :fieldDB "value"} ...]}
-                
 (cf/validate! form) ;; call all validations and set error
 (ct/set-error! form error) ;; manually set error, see Usage for data type
 (cf/valid? form) ;; => boolean 
@@ -114,7 +124,7 @@ A plain atom
 
 ```clojure
 
-;; Manually set state atom, but default values will not be set
+;; Manually set state atom, however default values will not be set
 
 (def state-atom (cf/new-state {}))
 (def state-atom (cf/new-state {:fieldA ...}))

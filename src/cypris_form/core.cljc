@@ -52,6 +52,7 @@
   (valid-base? [this]))
 
 (defprotocol IInput
+  (set-input! [f vs])
   (input [f]))
 
 (defprotocol IValidate
@@ -159,6 +160,9 @@
       (submit!* state-cursor validation coercion action)))
 
   IInput
+  (set-input! [_ vs]
+    (set-value!* state-cursor vs))
+
   (input [_]
     (input* state-cursor))
 

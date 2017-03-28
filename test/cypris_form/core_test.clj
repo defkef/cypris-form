@@ -160,6 +160,13 @@
       (c/submit! f)
       (is (= {:values {:user "me"} :form f} @submitted-values))))
 
+  (testing "set input manually"
+    (let [fdef [:user {:type :text}]
+          state (c/new-state {:user "me"})
+          f (c/form-with-state fdef state #())]
+      (c/set-input! f {:user "john"})
+      (is (= {:user "john"} (c/input f)))))
+
   (testing "has changed input"
     (let [fdef [:field {:type :text}]
           state (c/new-state {})
