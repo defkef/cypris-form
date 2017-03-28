@@ -152,11 +152,14 @@
     (submit! this {}))
 
   (submit! [this options]
-    (let [{:keys [validation coercion action]
+    (let [{:keys [validation coercion action params]
            :or {validation validation
                 coercion coercion
                 action action}} options
-          action (fn [vs] (action {:values vs :form this}))]
+          action (fn [vs]
+                   (if params
+                     (action {:values vs :form this :params params})
+                     (action {:values vs :form this})))]
       (submit!* state-cursor validation coercion action)))
 
   IInput

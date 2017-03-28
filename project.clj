@@ -1,4 +1,4 @@
-(defproject cypris-form "1.0.2"
+(defproject cypris-form "1.0.3"
   :description "A cljs library to provide a decent interface to forms including state and error handling."
   :url "https://github.com/defkef/cypris-form"
   :license {:name "Eclipse Public License"

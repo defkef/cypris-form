@@ -158,7 +158,11 @@
 
     (testing "submit"
       (c/submit! f)
-      (is (= {:values {:user "me"} :form f} @submitted-values))))
+      (is (= {:values {:user "me"} :form f} @submitted-values)))
+
+    (testing "submit with additional params"
+      (c/submit! f {:params {:custom 'value}})
+      (is (= {:values {:user "me"} :form f :params {:custom 'value}} @submitted-values))))
 
   (testing "set input manually"
     (let [fdef [:user {:type :text}]
